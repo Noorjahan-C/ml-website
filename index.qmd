@@ -1,0 +1,39 @@
+---
+title: "Machine Learning Capsule"
+---
+
+# Welcome 👋
+
+This website is my **Machine Learning teaching capsule** — short, focused notes for:
+- beginners,
+- interdisciplinary learners,
+- and quick revision before interviews or exams.
+
+## How to Use These Notes
+
+- Start with **Foundations** (NumPy and Pandas)
+- Then move to **Supervised ML** (Regression, Classification, SVM, etc.)
+- Use the left Table of Contents for quick navigation inside each page
+- Use the top menu to jump between topics
+
+## What is Machine Learning?
+
+> Machine Learning is a field of AI where computers learn patterns from data and use them to make predictions or decisions, without being explicitly programmed for every rule.
+
+### Basic Workflow
+
+1. **Data** → collect and clean data
+2. **Features** → convert raw data into useful numeric form
+3. **Model** → choose and train an algorithm
+4. **Evaluation** → check accuracy / error using metrics
+5. **Deployment** → use the model on new, unseen data
+
+### Types of ML Covered in This Site
+
+- **Supervised learning**: Regression and Classification
+- (You can later add)
+  - Unsupervised learning (Clustering, Dimensionality Reduction)
+  - Model evaluation and regularization
+  - Explainable AI (SHAP, etc.)
+
+> Use this site along with Jupyter Notebook / VS Code so that you can **run all examples yourself**.

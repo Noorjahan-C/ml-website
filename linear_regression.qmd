@@ -1,0 +1,12 @@
+---
+title: "Linear Regression"
+---
+
+# Linear Regression
+
+This page will contain:
+
+- Intuition of linear regression
+- Equation and cost function (MSE)
+- Example with scikit-learn
+- When to use / limitations

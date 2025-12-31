@@ -1,0 +1,12 @@
+---
+title: "Pandas – Data Handling"
+---
+
+# Pandas – Data Handling
+
+This page will contain notes on:
+
+- Loading CSV/Excel files
+- DataFrames
+- Handling missing values
+- Basic data exploration for ML

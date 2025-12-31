@@ -1,0 +1,11 @@
+---
+title: "Support Vector Machine (SVM)"
+---
+
+# Support Vector Machine (SVM)
+
+This page will include:
+
+- Margin & support vectors
+- Linear vs kernel SVM
+- Example with scikit-learn

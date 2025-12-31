@@ -1,0 +1,12 @@
+---
+title: "Logistic Regression"
+---
+
+# Logistic Regression
+
+This page will cover:
+
+- Binary classification idea
+- Sigmoid function
+- Decision boundary
+- Example with scikit-learn
