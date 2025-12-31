@@ -1,0 +1,1350 @@
+<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml" lang="en" xml:lang="en"><head>
+
+<meta charset="utf-8">
+<meta name="generator" content="quarto-1.8.26">
+
+<meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=yes">
+
+
+<title>NumPy Notes – Machine Learning Capsule</title>
+<style>
+code{white-space: pre-wrap;}
+span.smallcaps{font-variant: small-caps;}
+div.columns{display: flex; gap: min(4vw, 1.5em);}
+div.column{flex: auto; overflow-x: auto;}
+div.hanging-indent{margin-left: 1.5em; text-indent: -1.5em;}
+ul.task-list{list-style: none;}
+ul.task-list li input[type="checkbox"] {
+  width: 0.8em;
+  margin: 0 0.8em 0.2em -1em; /* quarto-specific, see https://github.com/quarto-dev/quarto-cli/issues/4556 */ 
+  vertical-align: middle;
+}
+</style>
+
+
+<script src="site_libs/quarto-nav/quarto-nav.js"></script>
+<script src="site_libs/quarto-nav/headroom.min.js"></script>
+<script src="site_libs/clipboard/clipboard.min.js"></script>
+<script src="site_libs/quarto-search/autocomplete.umd.js"></script>
+<script src="site_libs/quarto-search/fuse.min.js"></script>
+<script src="site_libs/quarto-search/quarto-search.js"></script>
+<meta name="quarto:offset" content="./">
+<script src="site_libs/quarto-html/quarto.js" type="module"></script>
+<script src="site_libs/quarto-html/tabsets/tabsets.js" type="module"></script>
+<script src="site_libs/quarto-html/axe/axe-check.js" type="module"></script>
+<script src="site_libs/quarto-html/popper.min.js"></script>
+<script src="site_libs/quarto-html/tippy.umd.min.js"></script>
+<script src="site_libs/quarto-html/anchor.min.js"></script>
+<link href="site_libs/quarto-html/tippy.css" rel="stylesheet">
+<link href="site_libs/quarto-html/quarto-syntax-highlighting-587c61ba64f3a5504c4d52d930310e48.css" rel="stylesheet" id="quarto-text-highlighting-styles">
+<script src="site_libs/bootstrap/bootstrap.min.js"></script>
+<link href="site_libs/bootstrap/bootstrap-icons.css" rel="stylesheet">
+<link href="site_libs/bootstrap/bootstrap-e31584831b205ffbb2d98406f31c2a5b.min.css" rel="stylesheet" append-hash="true" id="quarto-bootstrap" data-mode="light">
+<script id="quarto-search-options" type="application/json">{
+  "location": "navbar",
+  "copy-button": false,
+  "collapse-after": 3,
+  "panel-placement": "end",
+  "type": "overlay",
+  "limit": 50,
+  "keyboard-shortcut": [
+    "f",
+    "/",
+    "s"
+  ],
+  "show-item-context": false,
+  "language": {
+    "search-no-results-text": "No results",
+    "search-matching-documents-text": "matching documents",
+    "search-copy-link-title": "Copy link to search",
+    "search-hide-matches-text": "Hide additional matches",
+    "search-more-match-text": "more match in this document",
+    "search-more-matches-text": "more matches in this document",
+    "search-clear-button-title": "Clear",
+    "search-text-placeholder": "",
+    "search-detached-cancel-button-title": "Cancel",
+    "search-submit-button-title": "Submit",
+    "search-label": "Search"
+  }
+}</script>
+
+
+</head>
+
+<body class="floating nav-fixed quarto-light">
+
+<div id="quarto-search-results"></div>
+  <header id="quarto-header" class="headroom fixed-top">
+    <nav class="navbar navbar-expand-lg " data-bs-theme="dark">
+      <div class="navbar-container container-fluid">
+      <div class="navbar-brand-container mx-auto">
+    <a class="navbar-brand" href="./index.html">
+    <span class="navbar-title">Machine Learning Capsule</span>
+    </a>
+  </div>
+            <div id="quarto-search" class="" title="Search"></div>
+          <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarCollapse" aria-controls="navbarCollapse" role="menu" aria-expanded="false" aria-label="Toggle navigation" onclick="if (window.quartoToggleHeadroom) { window.quartoToggleHeadroom(); }">
+  <span class="navbar-toggler-icon"></span>
+</button>
+          <div class="collapse navbar-collapse" id="navbarCollapse">
+            <ul class="navbar-nav navbar-nav-scroll me-auto">
+  <li class="nav-item">
+    <a class="nav-link" href="./index.html"> 
+<span class="menu-text">Home</span></a>
+  </li>  
+  <li class="nav-item dropdown ">
+    <a class="nav-link dropdown-toggle" href="#" id="nav-menu-foundations" role="link" data-bs-toggle="dropdown" aria-expanded="false">
+ <span class="menu-text">Foundations</span>
+    </a>
+    <ul class="dropdown-menu" aria-labelledby="nav-menu-foundations">    
+        <li>
+    <a class="dropdown-item" href="./numpy_intro.html">
+ <span class="dropdown-text">NumPy</span></a>
+  </li>  
+        <li>
+    <a class="dropdown-item" href="./pandas_intro.html">
+ <span class="dropdown-text">Pandas</span></a>
+  </li>  
+    </ul>
+  </li>
+  <li class="nav-item dropdown ">
+    <a class="nav-link dropdown-toggle" href="#" id="nav-menu-supervised-ml" role="link" data-bs-toggle="dropdown" aria-expanded="false">
+ <span class="menu-text">Supervised ML</span>
+    </a>
+    <ul class="dropdown-menu" aria-labelledby="nav-menu-supervised-ml">    
+        <li>
+    <a class="dropdown-item" href="./linear_regression.html">
+ <span class="dropdown-text">Linear Regression</span></a>
+  </li>  
+        <li>
+    <a class="dropdown-item" href="./logistic_regression.html">
+ <span class="dropdown-text">Logistic Regression</span></a>
+  </li>  
+        <li>
+    <a class="dropdown-item" href="./svm.html">
+ <span class="dropdown-text">SVM</span></a>
+  </li>  
+    </ul>
+  </li>
+</ul>
+          </div> <!-- /navcollapse -->
+            <div class="quarto-navbar-tools">
+</div>
+      </div> <!-- /container-fluid -->
+    </nav>
+</header>
+<!-- content -->
+<div id="quarto-content" class="quarto-container page-columns page-rows-contents page-layout-article page-navbar">
+<!-- sidebar -->
+  <nav id="quarto-sidebar" class="sidebar collapse collapse-horizontal quarto-sidebar-collapse-item sidebar-navigation floating overflow-auto">
+    <nav id="TOC" role="doc-toc" class="toc-active">
+    <h2 id="toc-title">On this page</h2>
+   
+  <ul>
+  <li><a href="#creating-a-2d-array" id="toc-creating-a-2d-array" class="nav-link active" data-scroll-target="#creating-a-2d-array"><span class="header-section-number">1</span> Creating a 2D array</a></li>
+  <li><a href="#creating-large-lists-and-arrays" id="toc-creating-large-lists-and-arrays" class="nav-link" data-scroll-target="#creating-large-lists-and-arrays"><span class="header-section-number">2</span> Creating large lists and arrays</a></li>
+  <li><a href="#timing-python-list-multiplica-tion" id="toc-timing-python-list-multiplica-tion" class="nav-link" data-scroll-target="#timing-python-list-multiplica-tion"><span class="header-section-number">3</span> Timing Python list multiplica tion</a></li>
+  <li><a href="#timing-numpy-array-multiplication" id="toc-timing-numpy-array-multiplication" class="nav-link" data-scroll-target="#timing-numpy-array-multiplication"><span class="header-section-number">4</span> Timing NumPy array multiplication</a></li>
+  <li><a href="#python-list-memory-consumption" id="toc-python-list-memory-consumption" class="nav-link" data-scroll-target="#python-list-memory-consumption"><span class="header-section-number">5</span> Python list memory consumption</a></li>
+  <li><a href="#numpy-array-memory-consumption" id="toc-numpy-array-memory-consumption" class="nav-link" data-scroll-target="#numpy-array-memory-consumption"><span class="header-section-number">6</span> NumPy array memory consumption</a></li>
+  <li><a href="#using-python-lists-requires-a-loop" id="toc-using-python-lists-requires-a-loop" class="nav-link" data-scroll-target="#using-python-lists-requires-a-loop"><span class="header-section-number">7</span> Using Python lists (Requires a loop)</a></li>
+  <li><a href="#using-numpy-no-loop-required" id="toc-using-numpy-no-loop-required" class="nav-link" data-scroll-target="#using-numpy-no-loop-required"><span class="header-section-number">8</span> Using NumPy (No loop required)</a></li>
+  <li><a href="#python-list-nested-list-representation" id="toc-python-list-nested-list-representation" class="nav-link" data-scroll-target="#python-list-nested-list-representation"><span class="header-section-number">9</span> Python list (Nested list representation)</a></li>
+  <li><a href="#numpy-direct-operations" id="toc-numpy-direct-operations" class="nav-link" data-scroll-target="#numpy-direct-operations"><span class="header-section-number">10</span> NumPy (Direct operations)</a></li>
+  <li><a href="#using-pythons-statistics-module" id="toc-using-pythons-statistics-module" class="nav-link" data-scroll-target="#using-pythons-statistics-module"><span class="header-section-number">11</span> Using Python’s statistics module</a></li>
+  <li><a href="#using-numpy-optimized" id="toc-using-numpy-optimized" class="nav-link" data-scroll-target="#using-numpy-optimized"><span class="header-section-number">12</span> Using NumPy (Optimized)</a></li>
+  <li><a href="#matrix-multiplication" id="toc-matrix-multiplication" class="nav-link" data-scroll-target="#matrix-multiplication"><span class="header-section-number">13</span> Matrix multiplication</a></li>
+  <li><a href="#creating-large-arrays" id="toc-creating-large-arrays" class="nav-link" data-scroll-target="#creating-large-arrays"><span class="header-section-number">14</span> Creating large arrays</a></li>
+  <li><a href="#d-array" id="toc-d-array" class="nav-link" data-scroll-target="#d-array"><span class="header-section-number">15</span> 1D Array</a></li>
+  <li><a href="#d-array-matrix" id="toc-d-array-matrix" class="nav-link" data-scroll-target="#d-array-matrix"><span class="header-section-number">16</span> 2D Array (Matrix)</a></li>
+  <li><a href="#d-array-1" id="toc-d-array-1" class="nav-link" data-scroll-target="#d-array-1"><span class="header-section-number">17</span> 3D Array</a></li>
+  </ul>
+</nav>
+</nav>
+<div id="quarto-sidebar-glass" class="quarto-sidebar-collapse-item" data-bs-toggle="collapse" data-bs-target=".quarto-sidebar-collapse-item"></div>
+<!-- margin-sidebar -->
+    <div id="quarto-margin-sidebar" class="sidebar margin-sidebar zindex-bottom">
+    </div>
+<!-- main -->
+<main class="content" id="quarto-document-content">
+
+<header id="title-block-header" class="quarto-title-block default">
+<div class="quarto-title">
+<h1 class="title">NumPy Notes</h1>
+</div>
+
+
+
+<div class="quarto-title-meta">
+
+    
+  
+    
+  </div>
+  
+
+
+</header>
+
+
+<p>What is NumPy?<br>
+NumPy (Numerical Python) is a powerful Python library used for numerical computations. It provides support for large, multi -dimensional arrays and matrices, along with a collection of mathematical functions to operate on these arrays efficiently. NumPy is widely used in scientific computing, data analysis, machine learning, and AI applications.<br>
+NumPy is an essential library for numerical computations in Python. Its efficiency, speed, and ease of use make it indispensable for data scien ce, AI, and scientific computing. Whether you’re working with large datasets, complex mathematical functions, or machine learning models, NumPy is the go -to tool.</p>
+<p>Why Do We Need NumPy?<br>
+1. Efficient Computation<br>
+ NumPy is significantly faster than Python lis ts because it uses C and Fortran under the hood.<br>
+ It provides optimized vectorized operations that eliminate the need for loops in numerical computations.<br>
+2. Memory Efficiency<br>
+ NumPy arrays consume less memory compared to Python lists due to their fixed data<br>
+type and efficient storage.<br>
+3. Multi -Dimensional Arrays (ndarray)<br>
+ NumPy supports n -dimensional arrays, making it useful for handling matrices and tensor operations.<br>
+4. Broadcasting<br>
+ It allows arithmetic operations on arrays of different shapes without expl icitly reshaping them.<br>
+5. Built -in Mathematical Functions<br>
+ Includes a vast range of mathematical functions like sin() , cos() , log() , mean() , std() , etc.<br>
+6. Integration with Other Libraries<br>
+ NumPy is the foundation of many data science and AI libraries, such as Pandas, SciPy, TensorFlow, and PyTorch.</p>
+<p>How to Use NumPy?<br>
+1. Installation<br>
+pip install numpy<br>
+2. Importing NumPy<br>
+import numpy as np<br>
+3. Creating Arrays<br>
+# Creating a 1D array<br>
+arr1 = np.array([1, 2, 3, 4, 5])<br>
+print(arr1)</p>
+<section id="creating-a-2d-array" class="level1" data-number="1">
+<h1 data-number="1"><span class="header-section-number">1</span> Creating a 2D array</h1>
+<p>arr2 = np.array([[1, 2, 3], [4, 5, 6]])<br>
+print(arr2)<br>
+4. Array Properties<br>
+print(arr2.shape) # (2, 3) -&gt; Rows, Columns<br>
+print(arr2.size) # Total number of elements<br>
+print(arr2.dtype) # Data type of elements<br>
+5. Special Arrays<br>
+np.zeros((3, 3)) # 3x3 matrix filled with zeros np.ones((2, 2)) # 2x2 matrix filled with ones<br>
+np.eye(3) # Identity matrix of size 3x3<br>
+np.arange(0, 10, 2) # Array from 0 to 10 with step 2<br>
+np.linspace(1, 5, 10) # 10 values between 1 and 5<br>
+6. Mathematical Operations<br>
+a = np.array([1, 2, 3]) b = np.array([4, 5, 6])</p>
+<p>print(a + b) # Element -wise addition<br>
+print(a - b) # Element -wise subtraction<br>
+print(a * b) # Element -wise multiplication<br>
+print(a / b) # Element -wise division<br>
+print(np.dot(a, b)) # Dot product<br>
+7. Array Reshaping<br>
+arr = np.arange(1, 10)<br>
+reshaped = arr.reshape(3, 3) # Reshapes 1D array into 3x3 matrix<br>
+print(reshaped)<br>
+8. Indexing &amp; Slicing<br>
+arr = np.array([10, 20, 30, 40, 50])<br>
+print(arr[1]) # 20 (Indexing)<br>
+print(arr[1:4]) # [20, 30, 40] (Slicing)<br>
+9. Aggregation Function s arr = np.array([10, 20, 30, 40])</p>
+<p>print(np.sum(arr)) # Sum of elements</p>
+<p>print(np.mean(arr)) # Mean of elements<br>
+print(np.std(arr)) # Standard deviation<br>
+print(np.min(arr)) # Minimum value<br>
+print(np.max(arr)) # Maximum value<br>
+10. Random Numbers<br>
+np.random.rand(3, 3) # 3x3 matrix of random numbers between 0 and 1<br>
+np.random.randint(1, 100, (3, 3)) # 3x3 matrix of random integers from 1 to 100</p>
+<p>Why Do We Need NumPy Arrays Instead of Python Lists or Standard Python Sequences?<br>
+Python lists are flexible and easy to use, but they have significant performance and memory limitations when dealing with large numerical computations. NumPy arrays ( ndarray ) are optimized for performance, memory efficiency, and numerical operations, making them a superior choice for numerical and scientific computing.</p>
+<ol type="1">
+<li>Performance: NumPy is Faster than Python Lists<br>
+Reason: NumPy Uses Optimized C Implementations<br>
+NumPy operations are implemented in C and Fortran , which makes them significantly faster<br>
+than Python lists, wh ich are dynamically typed and interpreted at runtime.<br>
+Example: Speed Comparison<br>
+Let’s compare the speed of NumPy arrays and Python lists for an element -wise multiplication operation.<br>
+Let’s compare the speed of NumPy arrays and Python lists for an element -wise multiplication operation.</li>
+</ol>
+<p>import numpy as np<br>
+import time</p>
+</section>
+<section id="creating-large-lists-and-arrays" class="level1" data-number="2">
+<h1 data-number="2"><span class="header-section-number">2</span> Creating large lists and arrays</h1>
+<p>size = 10**6<br>
+py_list1 = list(range(size))<br>
+py_list2 = list(range(size))<br>
+np_array1 = np.arange(size)<br>
+np_array2 = np.arange(size)</p>
+</section>
+<section id="timing-python-list-multiplica-tion" class="level1" data-number="3">
+<h1 data-number="3"><span class="header-section-number">3</span> Timing Python list multiplica tion</h1>
+<p>start = time.time()<br>
+py_result = [x * y for x, y in zip(py_list1, py_list2)]<br>
+end = time.time()</p>
+<p>print(“Python List Time:”, end - start)</p>
+</section>
+<section id="timing-numpy-array-multiplication" class="level1" data-number="4">
+<h1 data-number="4"><span class="header-section-number">4</span> Timing NumPy array multiplication</h1>
+<p>start = time.time()<br>
+np_result = np_array1 * np_array2 # Vectorized operation<br>
+end = time.time()<br>
+print(“NumPy Array Time:”, end – start) Result: NumPy is typically 10-100x faster than Python lists for large operations.</p>
+<ol start="2" type="1">
+<li>Memory Efficiency: NumPy Uses Less Memory<br>
+Reason: NumPy Stores Data More Compactly<br>
+Python lists store elements as objects , which introduce extra overhead. NumPy arrays store elements as contiguous blocks of memory with fixed data types , making them more space - efficient.<br>
+Example: Memory Usage Comparison</li>
+</ol>
+<p>import sys</p>
+<p>size = 1000</p>
+</section>
+<section id="python-list-memory-consumption" class="level1" data-number="5">
+<h1 data-number="5"><span class="header-section-number">5</span> Python list memory consumption</h1>
+<p>py_l ist = list(range(size))<br>
+print(“Python List Memory (bytes):”, sys.getsizeof(py_list) + sum(sys.getsizeof(i) for i in py_list))</p>
+</section>
+<section id="numpy-array-memory-consumption" class="level1" data-number="6">
+<h1 data-number="6"><span class="header-section-number">6</span> NumPy array memory consumption</h1>
+<p>np_array = np.arange(size)<br>
+print(“NumPy Array Memory (bytes):”, np_array.nbytes)<br>
+Result: NumPy a rrays consume significantly less memory than Python lists.</p>
+<ol start="3" type="1">
+<li>Broadcasting: Element -wise Operations Without Loops<br>
+Reason: NumPy Supports Vectorized Operations<br>
+In Python lists, operations require explicit loops or list comprehensions, while NumPy arrays perform operations in a vectorized manner (applied to all elements simultaneously).<br>
+Example: Python List vs.&nbsp;NumPy Array Operations</li>
+</ol>
+</section>
+<section id="using-python-lists-requires-a-loop" class="level1" data-number="7">
+<h1 data-number="7"><span class="header-section-number">7</span> Using Python lists (Requires a loop)</h1>
+<p>py_list = [1, 2, 3, 4, 5]<br>
+py_result = [x * 2 for x in py_list] # Requires explicit iteration</p>
+</section>
+<section id="using-numpy-no-loop-required" class="level1" data-number="8">
+<h1 data-number="8"><span class="header-section-number">8</span> Using NumPy (No loop required)</h1>
+<p>np_array = np.array([1, 2, 3, 4, 5])<br>
+np_result = np_array * 2 # Vectorized operation</p>
+<p>Result: NumPy code is cleaner, shorter, and faster .</p>
+<ol start="4" type="1">
+<li>Multi -Dimensional Data Handlin g Reason: NumPy Supports Multi -Dimensional Arrays (ndarray)<br>
+Python lists require nested lists to represent matrices, making indexing and operations cumbersome. NumPy provides n-dimensional array s (ndarray) , allowing for efficient matrix operations . Example: 2D Matrix Operations</li>
+</ol>
+</section>
+<section id="python-list-nested-list-representation" class="level1" data-number="9">
+<h1 data-number="9"><span class="header-section-number">9</span> Python list (Nested list representation)</h1>
+<p>py_matrix = [[1, 2, 3], [4, 5, 6]]<br>
+py_matrix_transpose = [[py_matrix[j][i] for j in range(2)] for i in range(3)] # Manual tran spose</p>
+</section>
+<section id="numpy-direct-operations" class="level1" data-number="10">
+<h1 data-number="10"><span class="header-section-number">10</span> NumPy (Direct operations)</h1>
+<p>np_matrix = np.array([[1, 2, 3], [4, 5, 6]])<br>
+np_transpose = np_matrix.T # Transpose<br>
+Result: NumPy allows built -in, optimized matrix operations , avoiding manual loops.</p>
+<ol start="5" type="1">
+<li>Built -in Mathematical Functions<br>
+Reason: NumPy Provides Extensive Mathematical Functions<br>
+Python lists require manual implementations or math /statistics modules, while NumPy offers efficient built -in functions . Example: Computing Mean and Standard Deviation<br>
+import statistics</li>
+</ol>
+<p>py_list = [1, 2, 3, 4, 5]</p>
+</section>
+<section id="using-pythons-statistics-module" class="level1" data-number="11">
+<h1 data-number="11"><span class="header-section-number">11</span> Using Python’s statistics module</h1>
+<p>py_mean = statistics.mean(py_list)<br>
+py_std = statistics.stdev(py_list)</p>
+</section>
+<section id="using-numpy-optimized" class="level1" data-number="12">
+<h1 data-number="12"><span class="header-section-number">12</span> Using NumPy (Optimized)</h1>
+<p>np_array = np.array([1, 2, 3, 4, 5])<br>
+np_mean = np_array.mean()<br>
+np_std = np_array.std()</p>
+<p>print(“Python Mean:”, py_mean, ” Num Py Mean:“, np_mean)<br>
+print(”Python Std Dev:“, py_std,” NumPy Std Dev:“, np_std)</p>
+<p>Result: NumPy is more efficient for large datasets.</p>
+<ol start="6" type="1">
+<li>Advanced Operations: Linear Algebra &amp; Random Number Generation<br>
+NumPy provides:<br>
+ Linear Algebra (e.g., matrix multiplicat ion, eigenvalues, determinants)<br>
+ Random Number Generation (e.g., normal distribution, uniform distribution)<br>
+ Fourier Transforms &amp; Signal Processing<br>
+Example: Matrix Multiplication</li>
+</ol>
+<p>A = np.array([[1, 2], [3, 4]])<br>
+B = np.array([[5, 6], [7, 8]])</p>
+</section>
+<section id="matrix-multiplication" class="level1" data-number="13">
+<h1 data-number="13"><span class="header-section-number">13</span> Matrix multiplication</h1>
+<p>C = np.dot(A, B)<br>
+print(C)</p>
+<p>Vectorization in NumPy<br>
+Vectorization is a technique in NumPy that allows operations to be applied to entire arrays (vectors) at once, without the need for explicit loops . This is possible because NumPy executes o perations in compiled C code under the hood, making them significantly faster and more efficient than using Python loops.<br>
+Why Use Vectorization?<br>
+1. Faster Execution:<br>
+ NumPy operations run in optimized C code, avoiding Python’s slow loops.<br>
+2. Simpler Code:<br>
+ No need for “ for” loops or list comprehensions.<br>
+3. Memory Efficient:<br>
+ NumPy arrays use contiguous memory blocks, reducing overhead.<br>
+4. Parallel Execution:<br>
+ Takes advantage of SIMD (Single Instruction Multiple Data) processing.</p>
+<p>Example: Without vs.&nbsp;With Vectorization<br>
+Using Python Loops (Slow)<br>
+import numpy as np<br>
+import time</p>
+</section>
+<section id="creating-large-arrays" class="level1" data-number="14">
+<h1 data-number="14"><span class="header-section-number">14</span> Creating large arrays</h1>
+<p>size = 10**6<br>
+py_list1 = list(range(size))<br>
+py_list2 = list(range(size))</p>
+<p>start = time.time()<br>
+result = [x * y for x, y in zip(py_list1, py_list2)] # Loop -based multiplication<br>
+end = time.time()</p>
+<p>print(“Python Loop Time:”, end – start)</p>
+<p>Using NumPy Vectorization (Fast)<br>
+# Using NumPy (Vectorized)<br>
+np_array1 = np.arange(size)<br>
+np_array2 = np.arange(size)</p>
+<p>start = time.time()<br>
+result = np_array1 * np_array2 # Vectorized multiplication<br>
+end = time.time()</p>
+<p>print(“NumPy Vectorization Time:”, end – start)</p>
+<p>Result: NumPy’s vectorized operations can be 10-100x faster than using Python loops!</p>
+<p>Broadcasting in NumPy<br>
+What is Broadcasting?<br>
+Broadcasting is a feature in NumPy that allows operations between arrays of different shapes without the need for explicit loops or reshaping. Instead of manually adjusting array dimensions, NumPy automatically expands smaller arrays so that element -wise operations can be performed efficie ntly.</p>
+<p>Why is Broadcasting Useful?<br>
+Avoids Explicit Loops → Faster execution<br>
+Memory Efficient → No unnecessary copies of arrays<br>
+Simplifies Code → Cleaner and more readable</p>
+<p>Broadcasting Rules<br>
+For NumPy to perform broadcasting, it follows three simple rules to match array shapes:<br>
+ If the dimensions are different, NumPy automatically adds missing dimensions to the smaller array (left -padding with 1s).</p>
+<p> If one dimension is 1, NumPy stretches it to match the other dimension.<br>
+ If dimensions are incompatible (n either is 1 and they are different), an error occurs.</p>
+<p>Examples of Broadcasting<br>
+Scalar and Array Broadcasting<br>
+import numpy as np</p>
+<p>arr = np.array([1, 2, 3]) # Shape: (3,)<br>
+scalar = 10 # Shape: ()</p>
+<p>result = arr + scalar # Broadcasting applies here<br>
+print(re sult) # [11 12 13]<br>
+NumPy automatically expands scalar to match arr. Shape transformation: (3,) + () → (3,)</p>
+<p>NumPy Arrays<br>
+NumPy arrays ( ndarray ) are multi -dimensional, fast, and memory -efficient structures used for numerical operations. Let’s explore their creation, access, assignment, slicing, and attributes .</p>
+<ol type="1">
+<li>Creating NumPy Arrays</li>
+</ol>
+<p>import numpy as np</p>
+</section>
+<section id="d-array" class="level1" data-number="15">
+<h1 data-number="15"><span class="header-section-number">15</span> 1D Array</h1>
+<p>arr1 = np.array([1, 2, 3, 4, 5])<br>
+print(arr1)</p>
+</section>
+<section id="d-array-matrix" class="level1" data-number="16">
+<h1 data-number="16"><span class="header-section-number">16</span> 2D Array (Matrix)</h1>
+<p>arr2 = np.array([[1, 2, 3], [4, 5, 6]])<br>
+print(arr2)</p>
+</section>
+<section id="d-array-1" class="level1" data-number="17">
+<h1 data-number="17"><span class="header-section-number">17</span> 3D Array</h1>
+<p>arr3 = np.array([[[1, 2], [3, 4]], [[5, 6], [7, 8]]])<br>
+print(arr3)<br>
+NumPy arrays are more efficient than Python lists for numerical computations.</p>
+<ol start="2" type="1">
+<li>Accessing Elements in NumPy Arrays<br>
+1D Array Indexin g arr = np.array([10, 20, 30, 40, 50])</li>
+</ol>
+<p>print(arr[0]) # First element → 10<br>
+print(arr[ -1]) # Last element → 50<br>
+2D Array Indexing<br>
+arr = np.array([[1, 2, 3], [4, 5, 6]])</p>
+<p>print(arr[0, 0]) # First row, first column → 1<br>
+print(arr[1, 2]) # Second row, third column → 6<br>
+3D Array Indexing<br>
+arr = np.array([[[1, 2], [3, 4]], [[5, 6], [7, 8]]])<br>
+print(arr[0, 1, 1]) # First block, second row, second column → 4<br>
+NumPy allows direct indexing without nested loops!</p>
+<ol start="3" type="1">
+<li>Assigning Values to NumPy Arrays</li>
+</ol>
+<p>arr = np.array([10, 20, 30]) arr[1] = 99 # Modifies second element<br>
+print(arr) # [10 99 30]<br>
+NumPy arrays are mutable , meaning values can be changed.</p>
+<ol start="4" type="1">
+<li>Slicing NumPy Arrays<br>
+1D Array Slicing<br>
+arr = np.array([10, 20, 30, 40, 50])</li>
+</ol>
+<p>print(arr[1:4]) # [20 30 40] (Elements from index 1 to 3)<br>
+print(arr[:3]) # [10 20 30] (First three elements)<br>
+print(arr[::2]) # [10 30 50] (Every second element)<br>
+2D Array Slicing</p>
+<p>arr = np.array([[1, 2, 3], [4, 5, 6], [7, 8, 9]])</p>
+<p>print(arr[:2, 1:]) # Extracts first two rows, from second column o nward Slicing does not create a new copy but a view! (Changes in slices affect the original array.)</p>
+<ol start="5" type="1">
+<li>Array Attributes<br>
+NumPy arrays have various attributes that describe their properties.</li>
+</ol>
+<p>arr = np.array([[1, 2, 3], [4, 5, 6]])</p>
+<p>print(arr.ndim) # Number of dimensions (2D → 2)<br>
+print(arr.shape) # Shape (Rows, Columns) → (2, 3)</p>
+<p>print(arr.size) # Total number of elements → 6<br>
+print(arr.dtype) # Data type of elements → int<br>
+print(arr.itemsize) # Memory size of each element (bytes)<br>
+Attributes help und erstand the structure and storage details of the array.</p>
+<ol start="6" type="1">
+<li>Array Dimension ( ndim )</li>
+</ol>
+<p>arr1 = np.array([1, 2, 3]) # 1D Array → ndim = 1<br>
+arr2 = np.array([[1, 2, 3], [4, 5, 6]]) # 2D Array → ndim = 2<br>
+arr3 = np.array([[[1, 2], [3, 4]], [[5, 6], [7, 8]]]) # 3D Array → ndim = 3</p>
+<p>print(arr1.ndim) # 1 print(arr2.ndim) # 2 print(arr3.ndim) # 3 Higher dimensions are useful for machine learning, image processing, and tensor operations.</p>
+<ol start="7" type="1">
+<li>Array Shape ( shape )</li>
+</ol>
+<p>arr1 = np.array([1, 2, 3]) # Shape → (3,)<br>
+arr2 = np.array([[1, 2, 3], [4, 5, 6]]) # Shape → (2,3)<br>
+arr3 = np.array([[[1, 2], [3, 4]], [[5, 6], [7, 8]]]) # Shape → (2,2,2)</p>
+<p>print(arr1.shape) # (3,) print(arr2.shape) # (2,3) print(arr3.shape) # (2,2,2) Shape represents (rows, columns, depth, etc .) and helps in reshaping and broadcasting.</p>
+<ol start="8" type="1">
+<li>Array Size ( size )</li>
+</ol>
+<p>arr1 = np.array([1, 2, 3]) # Size → 3 arr2 = np.array([[1, 2, 3], [4, 5, 6]]) # Size → 6</p>
+<p>print(arr1.size) # 3 print(arr2.size) # 6 Size tells the total number of elements present in th e array.</p>
+<ol start="9" type="1">
+<li>Changing the Shape of an Array<br>
+Using reshape() - Reshape is useful when working with machine learning models that require specific input dimensions.</li>
+</ol>
+<p>arr = np.arange(1, 10) # [1 2 3 4 5 6 7 8 9]</p>
+<p>reshaped_arr = arr.reshape(3, 3) # Converts 1D to 3x3 matrix<br>
+print(reshaped_arr)</p>
+<ol start="10" type="1">
+<li>Creating Special Arrays<br>
+Creating a Zeros Array - Creates an array filled with zeros of a given shape.</li>
+</ol>
+<p>import numpy as np<br>
+zeros_arr = np.zeros((3, 4)) # 3x4 matrix of zeros<br>
+print(zeros_arr)</p>
+<ol start="11" type="1">
+<li>Creating an Ones Array - Creates an array filled with ones.</li>
+</ol>
+<p>ones_arr = np.ones((2, 3)) # 2x3 matrix of ones<br>
+print(ones_arr)</p>
+<ol start="12" type="1">
+<li>Creating an Empty Array - Creates an array with uninitialized values (useful for efficiency).</li>
+</ol>
+<p>empty_arr = np.empty((2, 2)) # Creates an unin itialized array (values are random)<br>
+print(empty_arr)<br>
+13. Creating Ranges &amp; Linearly Spaced Arrays<br>
+Using np.arange() for Range Creation - Creates a sequence from start to end (exclusive) with step .</p>
+<p>arr = np.arange(1, 10, 2) # [1 3 5 7 9]<br>
+print(arr)</p>
+<p>Using np.linspace() for Linearly Spaced Values - Creates num evenly spaced values between start and end .</p>
+<p>arr = np.linspace(0, 10, 5) # [0. 2.5 5. 7.5 10.]<br>
+print(arr)</p>
+<ol start="14" type="1">
+<li>Sorting Arrays - Sorts an array in ascending order.</li>
+</ol>
+<p>arr = np.array([3, 1, 4, 2, 5] ) sorted_arr = np.sort(arr) # [1 2 3 4 5]<br>
+print(sorted_arr)</p>
+<ol start="15" type="1">
+<li>Concatenating Arrays<br>
+Concatenating Along Rows (Axis=0) - Joins two arrays along rows.</li>
+</ol>
+<p>arr1 = np.array([[1, 2], [3, 4]])<br>
+arr2 = np.array([[5, 6]])</p>
+<p>concat_arr = np.concatenate((arr1, arr2), axis=0) print(concat_arr)</p>
+<p>Concatenating Along Columns (Axis=1) - Joins two arrays along columns.</p>
+<p>arr1 = np.array([[1, 2], [3, 4]])<br>
+arr2 = np.array([[5], [6]])</p>
+<p>concat_arr = np.concatenate((arr1, arr2), axis=1)<br>
+print(concat_arr)</p>
+<ol start="16" type="1">
+<li>Reshaping Arrays - Reshapes a 1D array into a 2D array.</li>
+</ol>
+<p>arr = np.arange(6)<br>
+reshaped_arr = arr.reshape(2, 3)<br>
+print(reshaped_arr)</p>
+<ol start="17" type="1">
+<li>Adding a New Dimension<br>
+Using np.newaxis - Adds an extra dimension (e.g., converting 1D to 2D).</li>
+</ol>
+<p>arr = np.array([1, 2, 3])<br>
+arr_2d = arr[:, np.newaxis]<br>
+print(arr_2d.shape) # (3, 1)</p>
+<p>Using np.expand_dims() - Expands the array along a specified axis.</p>
+<p>arr = np.array([1, 2, 3])<br>
+expanded_arr = np.expand_dims(arr, axis=0)<br>
+print(expanded_arr.shape) # (1, 3)</p>
+<ol start="18" type="1">
+<li>Slicing Arrays - Extracts part of t he array.</li>
+</ol>
+<p>arr = np.array([10, 20, 30, 40, 50])<br>
+print(arr[1:4]) # [20 30 40] (Extract elements 1 to 3)</p>
+<ol start="19" type="1">
+<li>Condition -Based Slicing - Selects elements that meet a condition.</li>
+</ol>
+<p>arr = np.array([10, 20, 30, 40, 50])<br>
+filtered_arr = arr[arr &gt; 25] # [30 40 50]<br>
+print(filtered_arr)</p>
+<ol start="20" type="1">
+<li>Stacking Arrays<br>
+Vertical Stacking ( vstack ) - Stacks arrays row -wise (vertically).</li>
+</ol>
+<p>arr1 = np.array([1, 2])<br>
+arr2 = np.array([3, 4])</p>
+<p>vstacked = np.vstack((arr1, arr2))<br>
+print(vstacked)<br>
+Horizontal Stacking ( hstack ) - Stacks arrays column -wise (horizontally).</p>
+<p>arr1 = np.array([[1], [2]])<br>
+arr2 = np.array([[3], [4]])</p>
+<p>hstacked = np.hstack((arr1, arr2))<br>
+print(hstacked)</p>
+<ol start="21" type="1">
+<li>Splitting Arrays<br>
+Horizontal Splitting - Splits an array into multiple sub -arrays along columns.</li>
+</ol>
+<p>arr = np.array([[1, 2, 3, 4], [5, 6, 7, 8]])</p>
+<p>split_arr = np.hsplit(arr, 2)<br>
+print(split_arr)</p>
+<ol start="22" type="1">
+<li>Views vs Copies in NumPy<br>
+View (Shallow Copy) - Changes in a view affect the original array.</li>
+</ol>
+<p>arr = np.array([1, 2, 3, 4])<br>
+view_arr = arr.view()<br>
+view_arr[0] = 99 # Modifies original<br>
+print(arr) # [99 2 3 4]</p>
+<p>Copy (Deep Copy) - A copy creates a separate array.</p>
+<p>arr = np.array([1, 2, 3, 4])</p>
+<p>copy_arr = arr.copy()<br>
+copy_arr[0] = 99 # Does NOT modify original<br>
+print(arr) # [1 2 3 4]</p>
+<ol start="23" type="1">
+<li>Basic Arithmetic Operations in NumPy<br>
+NumPy allows element -wise arithmetic operations on arrays without loops.<br>
+Addition of Arrays</li>
+</ol>
+<p>import numpy as np</p>
+<p>arr1 = np.array([1, 2, 3])<br>
+arr2 = np.array([4, 5, 6])<br>
+result = arr1 + arr2 # Element -wise addition<br>
+print(result) # [5 7 9] Subtraction of Arrays<br>
+result = arr1 - arr2 # Element -wise subtraction<br>
+print(result) # [-3 -3 -3] Multiplication of Arrays<br>
+result = arr1 * arr2 # Element -wise multiplication<br>
+print(result) # [4 10 18]<br>
+Division of Arrays<br>
+result = arr1 / arr2 # Element -wise division<br>
+print(result) # [0.25 0.4 0.5]<br>
+NumPy automatically handles division by zero, returning inf instead of an error.</p>
+<ol start="24" type="1">
+<li>Aggregate Functions<br>
+NumPy provides fast aggregate functions for numerical computations.<br>
+Sum of Elements</li>
+</ol>
+<p>arr = np.array([1, 2, 3, 4, 5])<br>
+print(np.sum(arr)) # 15 Minimum &amp; Maximum Value</p>
+<p>print(np.min(arr)) # 1 print(np.max(arr)) # 5 Product of All Elements<br>
+print(np.prod(arr)) # 120 (1<em>2</em>3<em>4</em>5)<br>
+Mean (Average)<br>
+print(np.mean(arr)) # 3.0</p>
+<p>Standard Deviation ( std) print(np.std(arr)) # 1.4142135623730951</p>
+<p>Standard deviation measures data dispersion.</p>
+<ol start="25" type="1">
+<li><p>Random Number Generation<br>
+NumPy has a built -in random module ( np.random ). Generate Random Numbers (0 to 1)<br>
+rand_arr = np.random.rand(3, 3) # 3x3 matrix of random numbers between 0 and 1<br>
+print(rand_arr)<br>
+Generate Random Integers<br>
+rand_int = np.random.randint(1, 100, (3, 3)) # 3x3 matrix with random integers from 1 to 100<br>
+print(rand_int)<br>
+Generate Normally Distributed Random Numbers<br>
+rand_norm = np.random.randn(5) # 5 random numbers from nor mal distribution (mean=0, std=1)<br>
+print(rand_norm)<br>
+Useful for statistics &amp; machine learning.</p></li>
+<li><p>Transposing a Matrix</p></li>
+</ol>
+<p>arr = np.array([[1, 2, 3], [4, 5, 6]])<br>
+transposed = np.transpose(arr)<br>
+print(transposed)<br>
+Flips the matrix along the diagonal (rows → columns, columns → rows).</p>
+<ol start="27" type="1">
+<li>Reversing &amp; Flipping Arrays<br>
+Reverse a 1D Array<br>
+arr = np.array([1, 2, 3, 4, 5])<br>
+reversed_arr = arr[:: -1] print(reversed_arr) # [5 4 3 2 1]<br>
+Reverse Rows in a 2D Array<br>
+arr = np.array([[1, 2, 3], [4, 5, 6]])<br>
+reversed_rows = arr[:: -1, :] print(reversed_rows)</li>
+</ol>
+<p>Reverse Columns in a 2D Array<br>
+reversed_cols = arr[:, :: -1] print(reversed_cols)<br>
+Flipping rows or columns is useful for image processing and data transformations.<br>
+28. Flattening Multidimensional Arrays<br>
+Using flatten() - Creates a new 1D array (copy of original).<br>
+arr = np.array([[1, 2], [3, 4]])<br>
+flat_arr = arr.flatten()<br>
+print(flat_arr) # [1 2 3 4] Using ravel() - Returns a flattened view (does not create a copy).<br>
+flat_arr_ravel = arr.ravel()<br>
+print(flat_arr_ravel) # [1 2 3 4]</p>
+<p>Important Things to Keep in Mind While Using NumPy &amp; Common Pitfalls<br>
+While NumPy is powerful and efficient, there are several things you must keep in mind to avoid performance issues, incorrect results, or unexpected behaviour. Here’s a list of best practices and common pitfalls to watch out for.</p>
+<ol type="1">
+<li>Avoid Using Python Loops - Use Vectorization<br>
+The Problem: Using Loops for Operations<br>
+Using for loops instead of NumPy’s vectorized operations is slow and inefficient . Incorrect (Using Loops)<br>
+import numpy as np arr = np.array([1, 2, 3, 4, 5])<br>
+result = []</li>
+</ol>
+<p>for i in arr:<br>
+result.append(i * 2) # Loop -based multiplication</p>
+<p>print(result)<br>
+Correct (Vectorized Operations)<br>
+result = arr * 2 # Fast and efficient<br>
+print(result)</p>
+<p>Why? NumPy performs operations in op timized C code , which is significantly faster than Python loops.</p>
+<ol start="2" type="1">
+<li>Be Careful with Data Types ( dtype ) The Problem: Implicit Type Conversion<br>
+NumPy assigns a data type ( dtype ) automatically , but sometimes this can cause issues.</li>
+</ol>
+<p>Incorrect (Mismatched Types)<br>
+arr = np.array([1, 2, 3.5, 4]) # Mixed integer &amp; float<br>
+print(arr.dtype) # float64 (unexpected if you wanted integers)<br>
+Correct (Explicitly Defining dtype ) arr = np.array([1, 2, 3, 4], dtype=np.int32) # Force integers<br>
+print(arr.dtype) # int32</p>
+<p>Why? Specifying dtype ensures consistency and avoids unintended float or integer conversions.</p>
+<ol start="3" type="1">
+<li>Be Cautious with Floating Point Precision<br>
+The Problem: Precision Errors in Floating -Point Arithmetic<br>
+Floating -point numbers can introduce rounding errors .</li>
+</ol>
+<p>Incorrect (Expecting Exact Equality)<br>
+a = np.array([0.1, 0.2, 0.3])<br>
+print(np.sum(a) == 0.6) # False (precision issue)<br>
+Correct (Using np.isclose ) print(np.isclose(np.sum(a), 0.6)) # True</p>
+<p>Why? Floating -point arithmetic is not always exact , so use np.isclose () instead of ==.</p>
+<ol start="4" type="1">
+<li>Be Aware of Broadcasting Limitations<br>
+The Problem: Incompatible Shapes in Broadcasting<br>
+NumPy broadcasting allows operations between arrays of different shapes, but sometimes it fails.<br>
+Incorrect (Mismatched Shapes)<br>
+arr1 = np.array([[1, 2, 3], [4, 5, 6]]) # Shape (2,3)<br>
+arr2 = np.array([10, 20]) # Shape (2,)</li>
+</ol>
+<p>result = arr1 + arr2 # ERROR: Shape mismatch<br>
+Correct (Reshape for Compatibility)<br>
+arr2 = arr2[:, np.newaxis] # Convert to shape (2,1)<br>
+result = arr1 + arr2 # Now it works!<br>
+print(result)</p>
+<p>Why? Ensure shapes are compatible for broadcasting to avoid shape mismatch errors.</p>
+<ol start="5" type="1">
+<li>Avoid Using copy=False Carelessly<br>
+The Problem: Modifying an Array by Accident<br>
+Using views instead of copies can lead to unexpected modificat ions .</li>
+</ol>
+<p>Incorrect (Unintended Modification)<br>
+arr = np.array([1, 2, 3])<br>
+view_arr = arr.view() # Creates a view, not a copy</p>
+<p>view_arr[0] = 99 # Changes original array too!<br>
+print(arr) # [99 2 3] Correct (Ensure a Copy is Created)<br>
+copy_arr = arr.copy() # Cre ates an independent copy<br>
+copy_arr[0] = 99</p>
+<p>print(arr) # [1 2 3] (Original remains unchanged)</p>
+<p>Why? If you don’t want changes in one array to affect another, always use copy() .</p>
+<ol start="6" type="1">
+<li>Avoid Memory Overhead with Large Arrays<br>
+The Problem: Creating Huge Arrays Can Crash Your System<br>
+NumPy can allocate very large arrays , leading to memory overflow.</li>
+</ol>
+<p>Incorrect (Large Memory Allocation)<br>
+huge_arr = np.zeros((100000, 100000)) # May crash!<br>
+Correct (Use Memory Efficient Methods)<br>
+huge_arr = np.zeros((10000, 10000), dtype =np.float32) # Use smaller <code>dtype</code></p>
+<p>Why? Optimize memory by using smaller dtype like float32 instead of float64 .</p>
+<ol start="7" type="1">
+<li>Use Boolean Masking Instead of Loops for Filtering<br>
+The Problem: Slow Filtering with Loops<br>
+Using loops for conditional selection is ineffi cient .</li>
+</ol>
+<p>Incorrect (Using Loops for Filtering)<br>
+arr = np.array([10, 20, 30, 40, 50])<br>
+result = [x for x in arr if x &gt; 25] # Slow print(result)<br>
+Correct (Using Boolean Masking)<br>
+result = arr[arr &gt; 25] # Fast and efficient<br>
+print(result) # [30 40 50]</p>
+<p>Why? Boolean masking is much faster than loops .</p>
+<ol start="8" type="1">
+<li>Be Aware of np.empty() Behavior<br>
+The Problem: np.empty() Does Not Initialize Values<br>
+Using np.empty() does not fill the array with zeros.</li>
+</ol>
+<p>Incorrect (Expecting Zeros)<br>
+arr = np.empty((2, 3))<br>
+print(arr) # Contai ns random uninitialized values<br>
+Correct (Use np.zeros() If You Need Zeros)<br>
+arr = np.zeros((2, 3)) # Explicitly initialize with zeros</p>
+<p>Why? np.empty() is for efficiency, not for initializing values.</p>
+<ol start="9" type="1">
+<li>Avoid Modifying Arrays During Iteration<br>
+The Problem: Changing an Array While Iterating Causes Issues<br>
+If you modify an array inside a loop, it may lead to unexpected results .</li>
+</ol>
+<p>Incorrect (Modifying While Iterating)<br>
+arr = np.array([1, 2, 3, 4])<br>
+for i in arr:<br>
+i *= 2 # Does not modify the original array</p>
+<p>print(arr) # [1 2 3 4] (No change)<br>
+Correct (Use Vectorized Operations)<br>
+arr = arr * 2<br>
+print(arr) # [2 4 6 8] (Correct result)</p>
+<p>Why? Direct assignments inside loops do not modify the array in -place.</p>
+<ol start="10" type="1">
+<li>Be Careful When Using np.append()<br>
+The Problem: np.append() is Slow for Large Arrays<br>
+Appending elements in NumPy creates a new array every time, making it inefficient.</li>
+</ol>
+<p>Incorrect (Repeated np.append() ) arr = np.array([1, 2, 3])<br>
+for i in range(10000):<br>
+arr = np.append(arr, i) # Slow! Correct (Use np.concatenate() or Lists)<br>
+arr = np.array([1, 2, 3])<br>
+arr = np.concatenate([arr, np.arange(10000)])</p>
+<p>Why? np.concatenate() is more efficient than multiple np.append() calls.</p>
+<p>Summary: Key Takeaways<br>
+ Use vectorized operations instead of loops<br>
+ Specify dtype explicitly when needed<br>
+ Use np.isclose() instead of == for floating -point comparisons<br>
+ Check array shapes when broadcasting<br>
+ Use .copy() if you need an independent array<br>
+ Optimize memory usage with smaller dtype<br>
+ Use Boolean indexing instead of loops<br>
+ Understand np.empty() does not initialize values<br>
+ Avoid modifying arrays while iterating<br>
+ Use np.concatenate() instead of repeated np.append()</p>
+<p>Where Not to Use NumPy?<br>
+While NumPy is a powerful tool for numerical computations, there are cases where using NumPy is not the best choice . Below are scenarios where NumPy should not be used , along with better alternatives.</p>
+<ol type="1">
+<li>Small Data or Simple Lists<br>
+The Problem: Overhead of NumPy for Small Data<br>
+NumPy is optimized for large numerical computations , but for small lists , the overhead of importing and using NumPy is unnecessary.<br>
+Using NumPy for Small Lists<br>
+import numpy as np<br>
+arr = np.array([1, 2, 3]) # Unnecessary for small lists<br>
+print(arr[1]) # Accessing elements<br>
+Better Alternative: Python Lists<br>
+lst = [1, 2, 3] # Simple and memory efficient<br>
+print(lst[1])</li>
+</ol>
+<p>Why? Python lists are more efficient for small datasets because NumPy introduces additional overhead .</p>
+<ol start="2" type="1">
+<li>Non -Numerical Data Processing<br>
+The Problem: NumPy is Built for Numbers, Not Strings<br>
+NumPy is not desi gned for handling strings, objects, or mixed data types efficiently.</li>
+</ol>
+<p>Using NumPy for Strings<br>
+import numpy as np<br>
+arr = np.array([“apple”, “banana”, “cherry”]) # Strings in NumPy (inefficient)<br>
+print(arr.dtype) # dtype=‘&lt;U6’<br>
+Better Alternative: Python Lists or Pandas<br>
+fruits = [“apple”, “banana”, “cherry”] # Use a simple list for strings</p>
+<p>Why? NumPy arrays are optimized for numerical data , while lists and Pandas handle text better .</p>
+<ol start="3" type="1">
+<li>Dynamic or Growing Arrays<br>
+The Problem: NumPy Arrays Have Fixed Sizes<br>
+NumPy arrays are static in size, meaning they are inefficient for dynamic resizing . Using NumPy for Dynamic Lists<br>
+import numpy as np<br>
+arr = np.array([1, 2, 3])<br>
+arr = np.append(arr, [4, 5, 6]) # Inefficient for large -scale append operations<br>
+Better Alternat ive: Python Lists<br>
+lst = [1, 2, 3]<br>
+lst.append(4) # Fast and efficient</li>
+</ol>
+<p>Why? Python lists grow dynamically , while NumPy creates a new array every time you append.</p>
+<ol start="4" type="1">
+<li>Deep Learning &amp; Complex Neural Networks<br>
+The Problem: NumPy Lacks GPU Support<br>
+For deep lear ning, NumPy does not utilize GPU acceleration or automatic differentiation.<br>
+Using NumPy for Deep Learning<br>
+import numpy as np<br>
+arr = np.random.rand(1000, 1000) # Large matrix, but no GPU acceleration</li>
+</ol>
+<p>Better Alternative: Use TensorFlow or PyTorch<br>
+import torch tensor = torch.rand(1000, 1000).cuda() # Uses GPU acceleration</p>
+<p>Why? PyTorch and TensorFlow support GPUs and are optimized for deep learning .</p>
+<ol start="5" type="1">
+<li>Handling Large Datasets That Don’t Fit in Memory<br>
+The Problem: NumPy Loads Everything into RAM<br>
+NumPy loads entire datasets into memory , which can cause memory overflow for very large datasets.<br>
+Using NumPy for Large Datasets<br>
+import numpy as np<br>
+large_arr = np.random.rand(100000000) # Consumes a lot of RAM!<br>
+Better Alternative: Use Pandas, Dask, or Vaex<br>
+impo rt dask.array as da<br>
+large_arr = da.random.random(100000000) # Uses disk -based computation</li>
+</ol>
+<p>Why? Dask and Vaex can handle large datasets by processing them in chunks instead of loading them into memory.</p>
+<ol start="6" type="1">
+<li>High -Performance Computing with Multi -Core Proces sing The Problem: NumPy is Single -Threaded for Most Operations<br>
+While NumPy supports multi -threading , many operations run in a single core , making it suboptimal for parallel computing .</li>
+</ol>
+<p>Using NumPy for Parallel Processing<br>
+import numpy as np<br>
+arr = np.arange( 1000000) result = np.sin(arr) # Mostly runs on a single CPU core<br>
+Better Alternative: Use Numba or Dask<br>
+from numba import jit<br>
+import numpy as np</p>
+<p><span class="citation" data-cites="jit">@jit</span>(nopython=True)<br>
+def compute(arr):<br>
+return np.sin(arr)</p>
+<p>arr = np.arange(1000000)<br>
+result = compute(arr) # Uses multiple CPU cores</p>
+<p>Why? Numba and Dask offer better performance for multi -core computing.</p>
+<ol start="7" type="1">
+<li>Image Processing (Without Specialized Libraries)<br>
+The Problem: NumPy Lacks Specialized Image Processing Functions<br>
+NumPy can store and manipulate image data , but it does not offer specialized functions like filtering, edge detection, or transformations.<br>
+Using NumPy for Image Processing<br>
+import numpy as np<br>
+image = np.zeros((256, 256, 3)) # Stores image but lacks processing functions<br>
+Better Alternative: Use Ope nCV or PIL<br>
+import cv2<br>
+image = cv2.imread(“image.jpg”) # Reads image efficiently<br>
+image_gray = cv2.cvtColor(image, cv2.COLOR_BGR2GRAY) # Converts to grayscale</li>
+</ol>
+<p>Why? OpenCV and PIL provide specialized tools for image manipulation.<br>
+8. Handling SQL -Like Data (Tables, Relational Data)<br>
+The Problem: NumPy Lacks Database Functionality<br>
+NumPy is not designed for working with tabular, structured, or relational data .</p>
+<p>Using NumPy for DataFrames<br>
+import numpy as np<br>
+data = np.array([[” Alice”, 25], [“Bob”, 30], [“Charlie”, 22]])<br>
+Better Alternative: Use Pandas<br>
+import pandas as pd<br>
+data = pd.DataFrame({“Name”: [” Alice”, “Bob”, “Charlie”], ” Age”: [25, 30, 22]})<br>
+print(data)<br>
+Why? Pandas provides faster indexing, filtering, and manipulation for tabular data.</p>
+<ol start="9" type="1">
+<li><p>Object -Oriented Programming (OOP) &amp; Complex Data Structures<br>
+The Problem: NumPy Arrays Do Not Support Complex Objects Well<br>
+NumPy only supports homogeneous data types , making it difficult to store complex objects . Using NumPy for Object -Oriented Programming<br>
+import numpy as np<br>
+class Person:</p>
+<p>def <strong>init</strong>(self, name, age):<br>
+self.name = name<br>
+self.age = age</p></li>
+</ol>
+<p>arr = np.array([Person(” Alice”, 25), Person(“Bob”, 30)]) # Works but inefficient<br>
+Better Alternative: Use Lists or Pandas<br>
+people = [Person(” Alice” , 25), Person(“Bob”, 30)]</p>
+<p>Why? Python lists and Pandas DataFrames are better for heterogeneous data .</p>
+
+
+</section>
+
+</main> <!-- /main -->
+<script id="quarto-html-after-body" type="application/javascript">
+  window.document.addEventListener("DOMContentLoaded", function (event) {
+    const icon = "";
+    const anchorJS = new window.AnchorJS();
+    anchorJS.options = {
+      placement: 'right',
+      icon: icon
+    };
+    anchorJS.add('.anchored');
+    const isCodeAnnotation = (el) => {
+      for (const clz of el.classList) {
+        if (clz.startsWith('code-annotation-')) {                     
+          return true;
+        }
+      }
+      return false;
+    }
+    const onCopySuccess = function(e) {
+      // button target
+      const button = e.trigger;
+      // don't keep focus
+      button.blur();
+      // flash "checked"
+      button.classList.add('code-copy-button-checked');
+      var currentTitle = button.getAttribute("title");
+      button.setAttribute("title", "Copied!");
+      let tooltip;
+      if (window.bootstrap) {
+        button.setAttribute("data-bs-toggle", "tooltip");
+        button.setAttribute("data-bs-placement", "left");
+        button.setAttribute("data-bs-title", "Copied!");
+        tooltip = new bootstrap.Tooltip(button, 
+          { trigger: "manual", 
+            customClass: "code-copy-button-tooltip",
+            offset: [0, -8]});
+        tooltip.show();    
+      }
+      setTimeout(function() {
+        if (tooltip) {
+          tooltip.hide();
+          button.removeAttribute("data-bs-title");
+          button.removeAttribute("data-bs-toggle");
+          button.removeAttribute("data-bs-placement");
+        }
+        button.setAttribute("title", currentTitle);
+        button.classList.remove('code-copy-button-checked');
+      }, 1000);
+      // clear code selection
+      e.clearSelection();
+    }
+    const getTextToCopy = function(trigger) {
+      const outerScaffold = trigger.parentElement.cloneNode(true);
+      const codeEl = outerScaffold.querySelector('code');
+      for (const childEl of codeEl.children) {
+        if (isCodeAnnotation(childEl)) {
+          childEl.remove();
+        }
+      }
+      return codeEl.innerText;
+    }
+    const clipboard = new window.ClipboardJS('.code-copy-button:not([data-in-quarto-modal])', {
+      text: getTextToCopy
+    });
+    clipboard.on('success', onCopySuccess);
+    if (window.document.getElementById('quarto-embedded-source-code-modal')) {
+      const clipboardModal = new window.ClipboardJS('.code-copy-button[data-in-quarto-modal]', {
+        text: getTextToCopy,
+        container: window.document.getElementById('quarto-embedded-source-code-modal')
+      });
+      clipboardModal.on('success', onCopySuccess);
+    }
+      var localhostRegex = new RegExp(/^(?:http|https):\/\/localhost\:?[0-9]*\//);
+      var mailtoRegex = new RegExp(/^mailto:/);
+        var filterRegex = new RegExp('/' + window.location.host + '/');
+      var isInternal = (href) => {
+          return filterRegex.test(href) || localhostRegex.test(href) || mailtoRegex.test(href);
+      }
+      // Inspect non-navigation links and adorn them if external
+     var links = window.document.querySelectorAll('a[href]:not(.nav-link):not(.navbar-brand):not(.toc-action):not(.sidebar-link):not(.sidebar-item-toggle):not(.pagination-link):not(.no-external):not([aria-hidden]):not(.dropdown-item):not(.quarto-navigation-tool):not(.about-link)');
+      for (var i=0; i<links.length; i++) {
+        const link = links[i];
+        if (!isInternal(link.href)) {
+          // undo the damage that might have been done by quarto-nav.js in the case of
+          // links that we want to consider external
+          if (link.dataset.originalHref !== undefined) {
+            link.href = link.dataset.originalHref;
+          }
+        }
+      }
+    function tippyHover(el, contentFn, onTriggerFn, onUntriggerFn) {
+      const config = {
+        allowHTML: true,
+        maxWidth: 500,
+        delay: 100,
+        arrow: false,
+        appendTo: function(el) {
+            return el.parentElement;
+        },
+        interactive: true,
+        interactiveBorder: 10,
+        theme: 'quarto',
+        placement: 'bottom-start',
+      };
+      if (contentFn) {
+        config.content = contentFn;
+      }
+      if (onTriggerFn) {
+        config.onTrigger = onTriggerFn;
+      }
+      if (onUntriggerFn) {
+        config.onUntrigger = onUntriggerFn;
+      }
+      window.tippy(el, config); 
+    }
+    const noterefs = window.document.querySelectorAll('a[role="doc-noteref"]');
+    for (var i=0; i<noterefs.length; i++) {
+      const ref = noterefs[i];
+      tippyHover(ref, function() {
+        // use id or data attribute instead here
+        let href = ref.getAttribute('data-footnote-href') || ref.getAttribute('href');
+        try { href = new URL(href).hash; } catch {}
+        const id = href.replace(/^#\/?/, "");
+        const note = window.document.getElementById(id);
+        if (note) {
+          return note.innerHTML;
+        } else {
+          return "";
+        }
+      });
+    }
+    const xrefs = window.document.querySelectorAll('a.quarto-xref');
+    const processXRef = (id, note) => {
+      // Strip column container classes
+      const stripColumnClz = (el) => {
+        el.classList.remove("page-full", "page-columns");
+        if (el.children) {
+          for (const child of el.children) {
+            stripColumnClz(child);
+          }
+        }
+      }
+      stripColumnClz(note)
+      if (id === null || id.startsWith('sec-')) {
+        // Special case sections, only their first couple elements
+        const container = document.createElement("div");
+        if (note.children && note.children.length > 2) {
+          container.appendChild(note.children[0].cloneNode(true));
+          for (let i = 1; i < note.children.length; i++) {
+            const child = note.children[i];
+            if (child.tagName === "P" && child.innerText === "") {
+              continue;
+            } else {
+              container.appendChild(child.cloneNode(true));
+              break;
+            }
+          }
+          if (window.Quarto?.typesetMath) {
+            window.Quarto.typesetMath(container);
+          }
+          return container.innerHTML
+        } else {
+          if (window.Quarto?.typesetMath) {
+            window.Quarto.typesetMath(note);
+          }
+          return note.innerHTML;
+        }
+      } else {
+        // Remove any anchor links if they are present
+        const anchorLink = note.querySelector('a.anchorjs-link');
+        if (anchorLink) {
+          anchorLink.remove();
+        }
+        if (window.Quarto?.typesetMath) {
+          window.Quarto.typesetMath(note);
+        }
+        if (note.classList.contains("callout")) {
+          return note.outerHTML;
+        } else {
+          return note.innerHTML;
+        }
+      }
+    }
+    for (var i=0; i<xrefs.length; i++) {
+      const xref = xrefs[i];
+      tippyHover(xref, undefined, function(instance) {
+        instance.disable();
+        let url = xref.getAttribute('href');
+        let hash = undefined; 
+        if (url.startsWith('#')) {
+          hash = url;
+        } else {
+          try { hash = new URL(url).hash; } catch {}
+        }
+        if (hash) {
+          const id = hash.replace(/^#\/?/, "");
+          const note = window.document.getElementById(id);
+          if (note !== null) {
+            try {
+              const html = processXRef(id, note.cloneNode(true));
+              instance.setContent(html);
+            } finally {
+              instance.enable();
+              instance.show();
+            }
+          } else {
+            // See if we can fetch this
+            fetch(url.split('#')[0])
+            .then(res => res.text())
+            .then(html => {
+              const parser = new DOMParser();
+              const htmlDoc = parser.parseFromString(html, "text/html");
+              const note = htmlDoc.getElementById(id);
+              if (note !== null) {
+                const html = processXRef(id, note);
+                instance.setContent(html);
+              } 
+            }).finally(() => {
+              instance.enable();
+              instance.show();
+            });
+          }
+        } else {
+          // See if we can fetch a full url (with no hash to target)
+          // This is a special case and we should probably do some content thinning / targeting
+          fetch(url)
+          .then(res => res.text())
+          .then(html => {
+            const parser = new DOMParser();
+            const htmlDoc = parser.parseFromString(html, "text/html");
+            const note = htmlDoc.querySelector('main.content');
+            if (note !== null) {
+              // This should only happen for chapter cross references
+              // (since there is no id in the URL)
+              // remove the first header
+              if (note.children.length > 0 && note.children[0].tagName === "HEADER") {
+                note.children[0].remove();
+              }
+              const html = processXRef(null, note);
+              instance.setContent(html);
+            } 
+          }).finally(() => {
+            instance.enable();
+            instance.show();
+          });
+        }
+      }, function(instance) {
+      });
+    }
+        let selectedAnnoteEl;
+        const selectorForAnnotation = ( cell, annotation) => {
+          let cellAttr = 'data-code-cell="' + cell + '"';
+          let lineAttr = 'data-code-annotation="' +  annotation + '"';
+          const selector = 'span[' + cellAttr + '][' + lineAttr + ']';
+          return selector;
+        }
+        const selectCodeLines = (annoteEl) => {
+          const doc = window.document;
+          const targetCell = annoteEl.getAttribute("data-target-cell");
+          const targetAnnotation = annoteEl.getAttribute("data-target-annotation");
+          const annoteSpan = window.document.querySelector(selectorForAnnotation(targetCell, targetAnnotation));
+          const lines = annoteSpan.getAttribute("data-code-lines").split(",");
+          const lineIds = lines.map((line) => {
+            return targetCell + "-" + line;
+          })
+          let top = null;
+          let height = null;
+          let parent = null;
+          if (lineIds.length > 0) {
+              //compute the position of the single el (top and bottom and make a div)
+              const el = window.document.getElementById(lineIds[0]);
+              top = el.offsetTop;
+              height = el.offsetHeight;
+              parent = el.parentElement.parentElement;
+            if (lineIds.length > 1) {
+              const lastEl = window.document.getElementById(lineIds[lineIds.length - 1]);
+              const bottom = lastEl.offsetTop + lastEl.offsetHeight;
+              height = bottom - top;
+            }
+            if (top !== null && height !== null && parent !== null) {
+              // cook up a div (if necessary) and position it 
+              let div = window.document.getElementById("code-annotation-line-highlight");
+              if (div === null) {
+                div = window.document.createElement("div");
+                div.setAttribute("id", "code-annotation-line-highlight");
+                div.style.position = 'absolute';
+                parent.appendChild(div);
+              }
+              div.style.top = top - 2 + "px";
+              div.style.height = height + 4 + "px";
+              div.style.left = 0;
+              let gutterDiv = window.document.getElementById("code-annotation-line-highlight-gutter");
+              if (gutterDiv === null) {
+                gutterDiv = window.document.createElement("div");
+                gutterDiv.setAttribute("id", "code-annotation-line-highlight-gutter");
+                gutterDiv.style.position = 'absolute';
+                const codeCell = window.document.getElementById(targetCell);
+                const gutter = codeCell.querySelector('.code-annotation-gutter');
+                gutter.appendChild(gutterDiv);
+              }
+              gutterDiv.style.top = top - 2 + "px";
+              gutterDiv.style.height = height + 4 + "px";
+            }
+            selectedAnnoteEl = annoteEl;
+          }
+        };
+        const unselectCodeLines = () => {
+          const elementsIds = ["code-annotation-line-highlight", "code-annotation-line-highlight-gutter"];
+          elementsIds.forEach((elId) => {
+            const div = window.document.getElementById(elId);
+            if (div) {
+              div.remove();
+            }
+          });
+          selectedAnnoteEl = undefined;
+        };
+          // Handle positioning of the toggle
+      window.addEventListener(
+        "resize",
+        throttle(() => {
+          elRect = undefined;
+          if (selectedAnnoteEl) {
+            selectCodeLines(selectedAnnoteEl);
+          }
+        }, 10)
+      );
+      function throttle(fn, ms) {
+      let throttle = false;
+      let timer;
+        return (...args) => {
+          if(!throttle) { // first call gets through
+              fn.apply(this, args);
+              throttle = true;
+          } else { // all the others get throttled
+              if(timer) clearTimeout(timer); // cancel #2
+              timer = setTimeout(() => {
+                fn.apply(this, args);
+                timer = throttle = false;
+              }, ms);
+          }
+        };
+      }
+        // Attach click handler to the DT
+        const annoteDls = window.document.querySelectorAll('dt[data-target-cell]');
+        for (const annoteDlNode of annoteDls) {
+          annoteDlNode.addEventListener('click', (event) => {
+            const clickedEl = event.target;
+            if (clickedEl !== selectedAnnoteEl) {
+              unselectCodeLines();
+              const activeEl = window.document.querySelector('dt[data-target-cell].code-annotation-active');
+              if (activeEl) {
+                activeEl.classList.remove('code-annotation-active');
+              }
+              selectCodeLines(clickedEl);
+              clickedEl.classList.add('code-annotation-active');
+            } else {
+              // Unselect the line
+              unselectCodeLines();
+              clickedEl.classList.remove('code-annotation-active');
+            }
+          });
+        }
+    const findCites = (el) => {
+      const parentEl = el.parentElement;
+      if (parentEl) {
+        const cites = parentEl.dataset.cites;
+        if (cites) {
+          return {
+            el,
+            cites: cites.split(' ')
+          };
+        } else {
+          return findCites(el.parentElement)
+        }
+      } else {
+        return undefined;
+      }
+    };
+    var bibliorefs = window.document.querySelectorAll('a[role="doc-biblioref"]');
+    for (var i=0; i<bibliorefs.length; i++) {
+      const ref = bibliorefs[i];
+      const citeInfo = findCites(ref);
+      if (citeInfo) {
+        tippyHover(citeInfo.el, function() {
+          var popup = window.document.createElement('div');
+          citeInfo.cites.forEach(function(cite) {
+            var citeDiv = window.document.createElement('div');
+            citeDiv.classList.add('hanging-indent');
+            citeDiv.classList.add('csl-entry');
+            var biblioDiv = window.document.getElementById('ref-' + cite);
+            if (biblioDiv) {
+              citeDiv.innerHTML = biblioDiv.innerHTML;
+            }
+            popup.appendChild(citeDiv);
+          });
+          return popup.innerHTML;
+        });
+      }
+    }
+  });
+  </script>
+</div> <!-- /content -->
+
+
+
+
+</body></html>
